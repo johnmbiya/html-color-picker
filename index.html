@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en-US">
+
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  <title>HTML Color Picker</title>
+  <script src="w3color.js"></script>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="Keywords" content="HTML,CSS,JavaScript,SQL,PHP,jQuery,ASP,XML,DOM,Bootstrap,Web development,W3C,tutorials,programming,training,learning,quiz,primer,lessons,references,examples,source code,colors,demos,tips">
+  <meta name="Description" content="Selectionner une coleurs au travers des multiples color pickers">
+  <link rel="stylesheet" href="w3.css">
+  <style>
+    #selectedcolor {
+      border: 1px solid #e3e3e3;
+      width: 80%;
+      height: 300px;
+      margin: auto;
+    }
+
+    #divpreview {
+      border: 1px solid #e3e3e3;
+      width: 80px;
+      height: 20px;
+      margin: auto;
+      visibility: hidden;
+    }
+
+    .colorTable,
+    #colorhexDIV,
+    #colorrgbDIV,
+    #colorripDIV,
+    #colorhslDIV,
+    #colornamDIV {
+      font-family: Consolas, 'Courier New', Courier, monospace;
+    }
+
+    #colorhexDIV,
+    #colorrgbDIV,
+    #colorripDIV,
+    #colorhslDIV,
+    #colornamDIV {
+      font-size: 18px;
+    }
+
+    #wronginputDIV {
+      text-align: left;
+      position: absolute;
+      margin: 4px 10px;
+      color: #a94442;
+      display: none;
+    }
+
+    .has-error input {
+      border: 1px solid red;
+    }
+
+    #entercolorDIV input,
+    #entercolorDIV button {
+      height: 28px;
+    }
+
+    #entercolorDIV input {
+      width: 80%;
+      border: 1px solid #d3d3d3;
+      border-right: none;
+    }
+
+   
+  </style>
+  <script>
+    var colorhex = "#000000";
+    var color = "#000000";
+    var colorObj = w3color(color);
+
+
+    var hh = 0;
+   
+  
+    function changeRed(value) {
+      document.getElementById('valRed').innerHTML = value;
+      changeAll();
+    }
+    function changeGreen(value) {
+      document.getElementById('valGreen').innerHTML = value;
+      changeAll();
+    }
+    function changeBlue(value) {
+      document.getElementById('valBlue').innerHTML = value;
+      changeAll();
+    }
+    function changeAll() {
+      var r = document.getElementById('valRed').innerHTML;
+      var g = document.getElementById('valGreen').innerHTML;
+      var b = document.getElementById('valBlue').innerHTML;
+      document.getElementById('change').style.backgroundColor = "rgb(" + r + "," + g + "," + b + ")";
+      document.getElementById('changetxt').innerHTML = "rgb(" + r + ", " + g + ", " + b + ")";
+      document.getElementById('changetxthex').innerHTML = w3color("rgb(" + r + "," + g + "," + b + ")").toHexString();
+    }
+
+
+    window.onload = function () {
+      var x = document.createElement("input");
+      x.setAttribute("type", "color");
+      if (x.type == "text") {
+        document.getElementById("html5DIV").style.visibility = "hidden";
+      }
+    }
+    function submitOnEnter(e) {
+      keyboardKey = e.which || e.keyCode;
+      if (keyboardKey == 13) {
+        clickColor(0, -1, -1);
+      }
+    }
+  </script>
+</head>
+
+<body style="text-align: center;">
+  <h1>HTML <span class="color_h1">Color Picker</span></h1>
+
+
+  <h2>RGB (Red, Green, Blue)</h2>
+  <table class="w3-table w3-border" style="">
+    <tbody>
+      <tr>
+        <th>Red (Rouge)</th>
+        <th>Green (Vert)</th>
+        <th>Blue (Blue)</th>
+      </tr>
+      <tr>
+        <td id="valRed">0</td>
+        <td id="valGreen">0</td>
+        <td id="valBlue">0</td>
+      </tr>
+      <tr>
+        <td id="red" style="height:30px;background-color:red"></td>
+        <td id="green" style="background-color:green"></td>
+        <td id="blue" style="background-color:blue"></td>
+      </tr>
+      <tr>
+        <td>
+          <input onchange="changeRed(this.value)" type="range" id="slideRed" name="slideRed" min="0" max="255">
+        </td>
+        <td>
+          <input onchange="changeGreen(this.value)" type="range" id="slideGreen" name="slideGreen" min="0" max="255">
+        </td>
+        <td>
+          <input onchange="changeBlue(this.value)" type="range" id="slideBlue" name="slideBlue" min="0" max="255">
+        </td>
+      </tr>
+    </tbody>
+  </table>
+  <div id="change" style="height: 100px;margin-top: 20px;"></div>
+
+  <div class="w3-center" style="font-family:Consolas, Courier New, Courier, monospace;font-size: 24px;">
+    <span id="changetxt"></span><br>
+    <span id="changetxthex"></span>
+  </div>
+
+
+</body>
+</html>
